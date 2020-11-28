@@ -14,6 +14,7 @@
 		D62F1F7C2570159B00E63399 /* TriviaQuestionsStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62F1F7B2570159B00E63399 /* TriviaQuestionsStock.swift */; };
 		D62F1F8125701A2D00E63399 /* TriviaQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62F1F8025701A2D00E63399 /* TriviaQuestion.swift */; };
 		D62F1F8625701E6100E63399 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62F1F8525701E6100E63399 /* QuestionCell.swift */; };
+		D6A3D87A2572DD4F0025E741 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A3D8792572DD4F0025E741 /* DetailViewController.swift */; };
 		D6BE6C67256A2A4A001B7622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE6C66256A2A4A001B7622 /* AppDelegate.swift */; };
 		D6BE6C69256A2A4A001B7622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE6C68256A2A4A001B7622 /* SceneDelegate.swift */; };
 		D6BE6C6B256A2A4A001B7622 /* MCQController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE6C6A256A2A4A001B7622 /* MCQController.swift */; };
@@ -49,6 +50,7 @@
 		D62F1F7B2570159B00E63399 /* TriviaQuestionsStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaQuestionsStock.swift; sourceTree = "<group>"; };
 		D62F1F8025701A2D00E63399 /* TriviaQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaQuestion.swift; sourceTree = "<group>"; };
 		D62F1F8525701E6100E63399 /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		D6A3D8792572DD4F0025E741 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		D6BE6C63256A2A4A001B7622 /* Quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6BE6C66256A2A4A001B7622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6BE6C68256A2A4A001B7622 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				D62F1F7B2570159B00E63399 /* TriviaQuestionsStock.swift */,
 				D62F1F8025701A2D00E63399 /* TriviaQuestion.swift */,
 				D62F1F8525701E6100E63399 /* QuestionCell.swift */,
+				D6A3D8792572DD4F0025E741 /* DetailViewController.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6A3D87A2572DD4F0025E741 /* DetailViewController.swift in Sources */,
 				D6BE6C6B256A2A4A001B7622 /* MCQController.swift in Sources */,
 				D62F1F74256F97BC00E63399 /* QuestionsViewController.swift in Sources */,
 				D6BE6C67256A2A4A001B7622 /* AppDelegate.swift in Sources */,
