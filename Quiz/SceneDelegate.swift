@@ -24,8 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print(tabbarController.children.count)
         let navController = tabbarController.children[2] as! UINavigationController
         let questionViewController = navController.topViewController as! QuestionsViewController
+        let flbController = tabbarController.children[1] as! FLBController
 
         questionViewController.imageStore = imageStore
+        flbController.imageStore = imageStore
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

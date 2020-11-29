@@ -14,6 +14,8 @@ class FLBController: UIViewController, UITextFieldDelegate {
     @IBOutlet var FLBNextBtn: UIButton!
     @IBOutlet var FLBSubmitBtn: UIButton!
     @IBOutlet var usrData: UITextField!
+    @IBOutlet var questionImage: UIImageView!
+    var imageStore: ImageStore!
     
         
     var FLBQuestions = TriviaQuestionsStock.sharedInstance
@@ -92,7 +94,6 @@ class FLBController: UIViewController, UITextFieldDelegate {
         }
         
     }
-
     
 
     // to dismiss alert
@@ -109,6 +110,12 @@ class FLBController: UIViewController, UITextFieldDelegate {
             // need to find a way to prevent index going out of bound
             FLBQuestionLabel.text = FLBQuestions.questionArray[currentQuestionIndex].question
             usrData.text = ""
+            let image = imageStore.image(forKey:
+                                            FLBQuestions.questionArray[currentQuestionIndex].imageKey)
+            print("imagekey is: " + FLBQuestions.questionArray[currentQuestionIndex].imageKey)
+            // put the image on the screen
+            questionImage.image = image
+
             
             FLBNextBtn.isEnabled = false
             FLBNextBtn.alpha = 0.3
@@ -146,6 +153,8 @@ class FLBController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         FLBQuestionLabel.text = FLBQuestions.questionArray[currentQuestionIndex].question
+        questionImage.image = imageStore.image(forKey:
+                                                FLBQuestions.questionArray[currentQuestionIndex].imageKey)
         
         FLBNextBtn.isEnabled = false
         FLBNextBtn.alpha = 0.3
@@ -163,7 +172,9 @@ class FLBController: UIViewController, UITextFieldDelegate {
         if Resources.resources.FLBReset {
             currentQuestionIndex = 0
             FLBQuestionLabel.text = FLBQuestions.questionArray[currentQuestionIndex].question
-            
+            questionImage.image = imageStore.image(forKey:
+                                                    FLBQuestions.questionArray[currentQuestionIndex].imageKey)
+
             usrData.text = ""
             
             FLBNextBtn.isEnabled = false

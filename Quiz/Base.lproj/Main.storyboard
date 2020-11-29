@@ -160,6 +160,7 @@
                         <outlet property="FLBNextBtn" destination="jTv-Th-uMK" id="7Ef-dI-Ytx"/>
                         <outlet property="FLBQuestionLabel" destination="VLY-jc-I6L" id="uhI-ob-Qnp"/>
                         <outlet property="FLBSubmitBtn" destination="XbN-WZ-bIc" id="XCq-61-jf1"/>
+                        <outlet property="questionImage" destination="oPk-Ie-ypq" id="S6K-gR-i8A"/>
                         <outlet property="usrData" destination="3U4-9B-COd" id="9nE-7f-szI"/>
                     </connections>
                 </viewController>

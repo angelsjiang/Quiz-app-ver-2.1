@@ -73,6 +73,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
         }
         alertController.addAction(imageLibraryAction)
         
+        // check to see if there is an imageKey present
+        if imageStore.image(forKey: triviaQuestion.imageKey) != nil {
+            let removeImageAction = UIAlertAction(title: "Remove Image", style: .destructive) { _ in
+                self.imageStore.deleteImage(forKey: self.triviaQuestion.imageKey)
+                self.imageView.image = nil
+            }
+            alertController.addAction(removeImageAction)
+        }
+        
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
@@ -114,9 +123,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print(triviaQuestion.question)
         questionField.text = triviaQuestion.question
-        print(triviaQuestion.answer)
         answerField.text = triviaQuestion.answer
         dateLabel.text = dateFormatter.string(from: triviaQuestion.date)
         
