@@ -388,6 +388,7 @@
                     <connections>
                         <outlet property="answerField" destination="xYb-2b-rkk" id="xQy-ty-ngX"/>
                         <outlet property="dateLabel" destination="xhy-Zc-0Rw" id="kk6-N7-Vf8"/>
+                        <outlet property="imageView" destination="qsF-sw-al0" id="YHx-ex-PKM"/>
                         <outlet property="questionField" destination="ie2-8g-YM1" id="cNQ-ke-ck2"/>
                     </connections>
                 </viewController>

@@ -10,7 +10,7 @@ import UIKit
 class QuestionsViewController: UITableViewController {
     
     var triviaQuestions = TriviaQuestionsStock.sharedInstance
-    
+    var imageStore: ImageStore!
 
     
     // function for add buttion
@@ -42,7 +42,12 @@ class QuestionsViewController: UITableViewController {
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
+            let question = triviaQuestions.questionArray[indexPath.row]
+            
             triviaQuestions.questionArray.remove(at: indexPath.row)
+            
+            // also remove image from cache
+            imageStore.deleteImage(forKey: question.imageKey)
             
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -98,6 +103,7 @@ class QuestionsViewController: UITableViewController {
                 let question = triviaQuestions.questionArray[row]
                 let detailViewController = segue.destination as! DetailViewController
                 detailViewController.triviaQuestion = question
+                detailViewController.imageStore = imageStore
             }
         case "newQuestion":
             let question = triviaQuestions.questionArray[triviaQuestions.questionArray.count - 1]

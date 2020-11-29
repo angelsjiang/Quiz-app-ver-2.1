@@ -11,12 +11,14 @@ class TriviaQuestion: Equatable, Codable {
     
     var question: String
     var answer: String
-    var date: Date
+    let date: Date
+    let imageKey: String
     
     init(question: String, answer: String) {
         self.question = question
         self.answer = answer
         self.date = Date()
+        self.imageKey = UUID().uuidString
     }
 
     

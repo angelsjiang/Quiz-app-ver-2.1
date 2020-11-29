@@ -7,17 +7,23 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITextFieldDelegate {
+class DetailViewController: UIViewController, UITextFieldDelegate,
+                            UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet var questionField: UITextField!
     @IBOutlet var answerField: UITextField!
     @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var imageView: UIImageView!
+
+    
     
     var triviaQuestion: TriviaQuestion! {
         didSet {
             navigationItem.title = triviaQuestion.question
         }
     }
+    var imageStore: ImageStore!
+    
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -39,20 +45,34 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
+    // function to choose image, either from camera if available, or photo library
     @IBAction func chooseImageSource(_ sender: UIBarButtonItem) {
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
-            print("Present Camera")
+        alertController.modalPresentationStyle = .popover
+        alertController.popoverPresentationController?.barButtonItem = sender
+        
+        // to check if camera is availabe at this current device
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
+                let imagePicker = self.imagePicker(for: .camera)
+                imagePicker.modalPresentationStyle = .popover
+                imagePicker.popoverPresentationController?.barButtonItem = sender
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+            alertController.addAction(cameraAction)
         }
-        alertController.addAction(cameraAction)
+        
         
         let imageLibraryAction = UIAlertAction(title: "Image Library", style: .default) { _ in
-            print("Present Image Library")
+            let imagePicker = self.imagePicker(for: .photoLibrary)
+            imagePicker.modalPresentationStyle = .popover
+            imagePicker.popoverPresentationController?.barButtonItem = sender
+            self.present(imagePicker, animated: true, completion: nil)
         }
         alertController.addAction(imageLibraryAction)
+        
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
@@ -60,6 +80,35 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    
+    // imagePicker
+    func imagePicker(for sourceType: UIImagePickerController.SourceType) -> UIImagePickerController {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
+        return imagePicker
+    }
+    
+    
+    // function to set up the image
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
+        // get picked image from info dictionary
+        let image = info[.originalImage] as! UIImage
+        
+        // store the image in imageStore
+        print("Question image key is: ", triviaQuestion.imageKey)
+        imageStore.setImage(image, forKey: triviaQuestion.imageKey)
+        
+        // put the image on the screen
+        imageView.image = image
+        
+        // take imagePicker off the screen
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +119,12 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         print(triviaQuestion.answer)
         answerField.text = triviaQuestion.answer
         dateLabel.text = dateFormatter.string(from: triviaQuestion.date)
+        
+        // Get the item key
+        let key = triviaQuestion.imageKey
+        
+        let imageToBeDisplayed = imageStore.image(forKey: key)
+        imageView.image = imageToBeDisplayed
     }
     
     // saves changes into question
