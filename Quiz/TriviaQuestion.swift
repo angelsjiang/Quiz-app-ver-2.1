@@ -7,14 +7,16 @@
 
 import UIKit
 
-class TriviaQuestion: Equatable {
+class TriviaQuestion: Equatable, Codable {
     
     var question: String
     var answer: String
+    var date: Date
     
     init(question: String, answer: String) {
         self.question = question
         self.answer = answer
+        self.date = Date()
     }
 
     

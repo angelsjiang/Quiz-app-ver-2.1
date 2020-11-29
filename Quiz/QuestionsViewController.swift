@@ -11,30 +11,30 @@ class QuestionsViewController: UITableViewController {
     
     var triviaQuestions = TriviaQuestionsStock.sharedInstance
     
+
     
-    @IBAction func toggleEditingMode(_ sender: UIButton) {
-        if isEditing {
-            sender.setTitle("Edit", for: .normal)
+    // function for add buttion
+    @IBAction func addQuestion(_ sender: UIBarButtonItem) {
+        let newQuestion = triviaQuestions.createItem()
+        
+        
+        // figure out where that question is in the array
+        if let index = triviaQuestions.questionArray.firstIndex(of: newQuestion) {
+            let indexPath = IndexPath(row: index, section: 0)
             
-            setEditing(false, animated: true)
-        }
-        else {
-            sender.setTitle("Done", for: .normal)
-            
-            setEditing(true, animated: true)
-            
-            // need to reset all the scores & questions
-            Resources.resources.FLBReset = true
-            Resources.resources.MCQReset = true
-            
-            // reset scores
-            Resources.resources.correctAns = 0
-            Resources.resources.wrongAns = 0
-            Resources.resources.flbScore = 0
-            Resources.resources.mcqScore = 0
-            
+            // insert this new tow into the table
+            tableView.insertRows(at: [indexPath], with: .automatic)
         }
     }
+    
+    
+    // adding edit button
+    required init?(coder decoder: NSCoder) {
+        super.init(coder:  decoder)
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+    }
+    
     
     // implementing table view row deletion
     override func tableView(_ tableView: UITableView,
@@ -80,6 +80,32 @@ class QuestionsViewController: UITableViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 75
+    }
+    
+    
+    // get the updated table
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "showQuestion":
+            if let row = tableView.indexPathForSelectedRow?.row {
+                let question = triviaQuestions.questionArray[row]
+                let detailViewController = segue.destination as! DetailViewController
+                detailViewController.triviaQuestion = question
+            }
+        case "newQuestion":
+            let question = triviaQuestions.questionArray[triviaQuestions.questionArray.count - 1]
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.triviaQuestion = question
+        default:
+            preconditionFailure("Unexpected segue identifier")
+        }
     }
     
 }
