@@ -272,6 +272,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8lW-ux-XU0">
                             <connections>
                                 <action selector="addQuestion:" destination="ng5-a2-ivI" id="Ajj-hT-4nS"/>
+                                <segue destination="TaW-fA-gEk" kind="show" identifier="newQuestion" id="LO6-Gn-Wtd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -360,7 +361,7 @@
                                 </constraints>
                             </stackView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kF8-B4-M6j">
-                                <rect key="frame" x="0.0" y="764" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="769" width="414" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="camera" id="Pk7-6J-ufb">
                                         <connections>
@@ -443,6 +444,9 @@
             <point key="canvasLocation" x="1186.9565217391305" y="89.732142857142847"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="LO6-Gn-Wtd"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="checkerboard.rectangle" catalog="system" width="128" height="93"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>

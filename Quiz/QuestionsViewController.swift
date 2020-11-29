@@ -15,22 +15,6 @@ class QuestionsViewController: UITableViewController {
     var detailViewController: DetailViewController!
 
     
-    // function for add buttion
-    @IBAction func addQuestion(_ sender: UIBarButtonItem) {
-        let newQuestion = triviaQuestions.createItem()
-        
-        // figure out where that question is in the array
-        if let index = triviaQuestions.questionArray.firstIndex(of: newQuestion) {
-            let indexPath = IndexPath(row: index, section: 0)
-            
-            // insert this new tow into the table
-            tableView.insertRows(at: [indexPath], with: .automatic)
-            
-            addNewQuestion = true
-        }
-    }
-    
-    
     
     // adding edit button
     required init?(coder decoder: NSCoder) {
@@ -133,16 +117,13 @@ class QuestionsViewController: UITableViewController {
                 detailViewController.triviaQuestion = question
                 detailViewController.imageStore = imageStore
             }
-//        case "newQuestion":
-////            let question = triviaQuestions.questionArray[triviaQuestions.questionArray.count - 1]
-////            let detailViewController = segue.destination as! DetailViewController
-////            detailViewController.triviaQuestion = question
-////            detailViewController.imageStore = imageStore
-//            if addNewQuestion {
-//                print("from QuestionViewController: ", addNewQuestion)
-//                let detailViewController = segue.destination as! DetailViewController
-//                detailViewController.toAddNewQuestion = true
-//            }
+        case "newQuestion":
+            if segue.destination is DetailViewController {
+                let dvc = segue.destination as? DetailViewController
+                let newQuestion = triviaQuestions.createItem()
+                dvc?.triviaQuestion = newQuestion
+                dvc?.imageStore = imageStore
+            }
         default:
             preconditionFailure("Unexpected segue identifier")
         }
