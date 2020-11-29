@@ -14,7 +14,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
     @IBOutlet var answerField: UITextField!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
-
+    
+    var triviaQuestionStock: TriviaQuestionsStock!
+    var toAddNewQuestion: Bool = false
     
     
     var triviaQuestion: TriviaQuestion! {
@@ -122,6 +124,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        print("from DetailViewController: ", toAddNewQuestion)
+        
+        if toAddNewQuestion {
+            let newQuestion = triviaQuestionStock.createItem()
+            triviaQuestion = newQuestion
+        }
+        
         
         questionField.text = triviaQuestion.question
         answerField.text = triviaQuestion.answer

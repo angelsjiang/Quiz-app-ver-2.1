@@ -12,13 +12,13 @@ class TriviaQuestionsStock {
     static let sharedInstance = TriviaQuestionsStock()
     
     var questionArray: [TriviaQuestion] = [
-        TriviaQuestion(question: "How many elements are on the Periodic table?", answer: "118"),
-        TriviaQuestion(question: "How many members are in the K-pop group named BTS?", answer: "7"),
-        TriviaQuestion(question: "On average, how many seeds does a strawberry have on its surface?", answer: "200"),
-        TriviaQuestion(question: "How many members were there in The Beatles?", answer: "4"),
-        TriviaQuestion(question: "Approximately how many percent of the human body is made up of water?", answer: "60"),
-        TriviaQuestion(question: "How many Inifinity Stones feature in the Marvel Cinematic Universe films?", answer: "6"),
-        TriviaQuestion(question: "Which day of July is Canada Day?", answer: "1")
+//        TriviaQuestion(question: "How many elements are on the Periodic table?", answer: "118"),
+//        TriviaQuestion(question: "How many members are in the K-pop group named BTS?", answer: "7"),
+//        TriviaQuestion(question: "On average, how many seeds does a strawberry have on its surface?", answer: "200"),
+//        TriviaQuestion(question: "How many members were there in The Beatles?", answer: "4"),
+//        TriviaQuestion(question: "Approximately how many percent of the human body is made up of water?", answer: "60"),
+//        TriviaQuestion(question: "How many Inifinity Stones feature in the Marvel Cinematic Universe films?", answer: "6"),
+//        TriviaQuestion(question: "Which day of July is Canada Day?", answer: "1")
     ]
     
     let questionArchiveUrl: URL = {

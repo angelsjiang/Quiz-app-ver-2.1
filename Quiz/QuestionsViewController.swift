@@ -11,12 +11,13 @@ class QuestionsViewController: UITableViewController {
     
     var triviaQuestions = TriviaQuestionsStock.sharedInstance
     var imageStore: ImageStore!
+    var addNewQuestion: Bool = false
+    var detailViewController: DetailViewController!
 
     
     // function for add buttion
     @IBAction func addQuestion(_ sender: UIBarButtonItem) {
         let newQuestion = triviaQuestions.createItem()
-        
         
         // figure out where that question is in the array
         if let index = triviaQuestions.questionArray.firstIndex(of: newQuestion) {
@@ -24,8 +25,11 @@ class QuestionsViewController: UITableViewController {
             
             // insert this new tow into the table
             tableView.insertRows(at: [indexPath], with: .automatic)
+            
+            addNewQuestion = true
         }
     }
+    
     
     
     // adding edit button
@@ -33,6 +37,29 @@ class QuestionsViewController: UITableViewController {
         super.init(coder:  decoder)
         
         navigationItem.leftBarButtonItem = editButtonItem
+        
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        
+        if isEditing {
+            super.setEditing(false, animated: true)
+            
+        }
+        
+        else {
+            super.setEditing(true, animated: true)
+            
+            // need to reset all the scores & questions
+            Resources.resources.FLBReset = true
+            Resources.resources.MCQReset = true
+
+            // reset scores
+            Resources.resources.correctAns = 0
+            Resources.resources.wrongAns = 0
+            Resources.resources.flbScore = 0
+            Resources.resources.mcqScore = 0
+        }
     }
     
     
@@ -96,6 +123,7 @@ class QuestionsViewController: UITableViewController {
     }
     
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showQuestion":
@@ -105,10 +133,16 @@ class QuestionsViewController: UITableViewController {
                 detailViewController.triviaQuestion = question
                 detailViewController.imageStore = imageStore
             }
-        case "newQuestion":
-            let question = triviaQuestions.questionArray[triviaQuestions.questionArray.count - 1]
-            let detailViewController = segue.destination as! DetailViewController
-            detailViewController.triviaQuestion = question
+//        case "newQuestion":
+////            let question = triviaQuestions.questionArray[triviaQuestions.questionArray.count - 1]
+////            let detailViewController = segue.destination as! DetailViewController
+////            detailViewController.triviaQuestion = question
+////            detailViewController.imageStore = imageStore
+//            if addNewQuestion {
+//                print("from QuestionViewController: ", addNewQuestion)
+//                let detailViewController = segue.destination as! DetailViewController
+//                detailViewController.toAddNewQuestion = true
+//            }
         default:
             preconditionFailure("Unexpected segue identifier")
         }

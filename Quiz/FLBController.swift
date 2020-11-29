@@ -152,21 +152,60 @@ class FLBController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FLBQuestionLabel.text = FLBQuestions.questionArray[currentQuestionIndex].question
-        questionImage.image = imageStore.image(forKey:
-                                                FLBQuestions.questionArray[currentQuestionIndex].imageKey)
-        
-        FLBNextBtn.isEnabled = false
-        FLBNextBtn.alpha = 0.3
+        if FLBQuestions.questionArray.count == 0 {
+            FLBQuestionLabel.text = "Question..."
+            questionImage.image = nil
+            
+            FLBNextBtn.isEnabled = false
+            FLBNextBtn.alpha = 0.3
+
+            FLBSubmitBtn.isEnabled = false
+            FLBSubmitBtn.alpha = 0.3
+
+        }
+        else {
+            FLBQuestionLabel.text = FLBQuestions.questionArray[currentQuestionIndex].question
+            questionImage.image = imageStore.image(forKey:
+                                                    FLBQuestions.questionArray[currentQuestionIndex].imageKey)
+            
+            FLBNextBtn.isEnabled = false
+            FLBNextBtn.alpha = 0.3
+            FLBSubmitBtn.isEnabled = true
+            FLBSubmitBtn.alpha = 1
+
+        }
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
-        print("from FLBController: ", currentQuestionIndex)
-        FLBQuestions = TriviaQuestionsStock.sharedInstance
-        FLBQuestionLabel.text = FLBQuestions.questionArray[currentQuestionIndex].question
+        if FLBQuestions.questionArray.count == 0 {
+            usrData.text = ""
+            FLBQuestionLabel.text = "Question..."
+            questionImage.image = nil
+            
+            FLBNextBtn.isEnabled = false
+            FLBNextBtn.alpha = 0.3
+
+            FLBSubmitBtn.isEnabled = false
+            FLBSubmitBtn.alpha = 0.3
+
+        }
+        else {
+            print("from FLBController: ", currentQuestionIndex)
+            FLBQuestions = TriviaQuestionsStock.sharedInstance
+            FLBQuestionLabel.text = FLBQuestions.questionArray[currentQuestionIndex].question
+            questionImage.image = imageStore.image(forKey:
+                                                    FLBQuestions.questionArray[currentQuestionIndex].imageKey)
+            
+            FLBSubmitBtn.isEnabled = true
+            FLBSubmitBtn.alpha = 1
+            FLBNextBtn.isEnabled = false
+            FLBNextBtn.alpha = 0.3
+
+        }
+
         
         // if reset is true
         if Resources.resources.FLBReset {
