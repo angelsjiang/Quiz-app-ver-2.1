@@ -123,6 +123,15 @@ class QuestionsViewController: UITableViewController {
                 let newQuestion = triviaQuestions.createItem()
                 dvc?.triviaQuestion = newQuestion
                 dvc?.imageStore = imageStore
+                // need to reset all the scores & questions
+                Resources.resources.FLBReset = true
+                Resources.resources.MCQReset = true
+
+                // reset scores
+                Resources.resources.correctAns = 0
+                Resources.resources.wrongAns = 0
+                Resources.resources.flbScore = 0
+                Resources.resources.mcqScore = 0
             }
         default:
             preconditionFailure("Unexpected segue identifier")

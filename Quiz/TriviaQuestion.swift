@@ -11,13 +11,19 @@ class TriviaQuestion: Equatable, Codable {
     
     var question: String
     var answer: String
-    let date: Date
+    let date: String
     let imageKey: String
     
     init(question: String, answer: String) {
         self.question = question
         self.answer = answer
-        self.date = Date()
+        
+        let currentDate = Date()
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateStyle = .medium
+
+        self.date = formatter.string(from: currentDate)
         self.imageKey = UUID().uuidString
     }
 

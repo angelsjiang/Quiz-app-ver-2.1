@@ -135,7 +135,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
         
         questionField.text = triviaQuestion.question
         answerField.text = triviaQuestion.answer
-        dateLabel.text = dateFormatter.string(from: triviaQuestion.date)
+//        dateLabel.text = dateFormatter.string(from: triviaQuestion.date)
+        dateLabel.text = triviaQuestion.date
         
         // Get the item key
         let key = triviaQuestion.imageKey
